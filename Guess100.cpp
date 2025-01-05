@@ -7,39 +7,39 @@
 
 using namespace std;
 
-int TryToGuess(int minNumber, int maxNumber) //Рекурсивно отгадываем число
+int TryToGuess(int minNumber, int maxNumber) // Рекурсивно отгадываем число
 {
-    if (minNumber == maxNumber) //Сначала проверяем, не отгадано ли число уже, в этом случае вопросов не задаём
+    if (minNumber == maxNumber) // Сначала проверяем, не отгадано ли число уже, в этом случае вопросов не задаём
     {
-        cout << "Загадано число " << minNumber << endl; //Собощаем о победе
-        return(1); //Возвращаем 1
+        cout << "Загадано число " << minNumber << endl; // Собощаем о победе
+        return(1); // Возвращаем 1
     };
 
     int predictNumber;
     char responce;
-    predictNumber = (maxNumber + minNumber) / 2;
-    cout << predictNumber << "? (<=>)\n";
+    predictNumber = (maxNumber + minNumber) / 2;// В планах поменять алгоритм на более случайный без потери качества
+    cout << predictNumber << "? (<, =, >)\n"; // Если не отгадано, то задаём вопрос
     cin >> responce;
     switch (responce)
     {
     case '<':
     {
-        return(TryToGuess(minNumber, predictNumber - 1) + 1); //Меньше, уменьшаем диапазон, увеличиваем счётчик попыток
+        return(TryToGuess(minNumber, predictNumber - 1) + 1); // Меньше, уменьшаем диапазон, увеличиваем счётчик попыток
     }
     break;
     case '>':
     {
-        return(TryToGuess(predictNumber + 1, maxNumber) + 1); //Больше, уменьшаем диапазон, увеличиваем счётчик попыток
+        return(TryToGuess(predictNumber + 1, maxNumber) + 1); // Больше, уменьшаем диапазон, увеличиваем счётчик попыток
     }
     break;
     case '=':
     {
-        return(1); //Угадали, возвращаем 1
+        return(1); // Угадали, возвращаем 1
     }
     break;
     default:
     {
-        cout << "Не понимаю!"; //Наши полномочия всё
+        cout << "Не понимаю!"; // Наши полномочия всё
         exit(0);
     }
     }
@@ -53,7 +53,7 @@ int main()
     int minNumber = 1;
     int maxNumber = 100;
     cout << "Игра \"Угадай число\"\n Загадайте число от " << minNumber << " до " << maxNumber << endl;
-    cout << "Угадано с " << TryToGuess(1, 100) << " попыток \n"; //Рекурсивно отгадываем, выводим количество попыток, равное уровню вложенности
+    cout << "Угадано с " << TryToGuess(minNumber, maxNumber) << " попыток \n"; // Рекурсивно отгадываем, выводим количество попыток, равное уровню вложенности
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
