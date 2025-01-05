@@ -6,7 +6,8 @@
 #include <cstdlib>
 
 using namespace std;
-int TryToGuess(int minNumber, int maxNumber)
+
+int TryToGuess(int minNumber, int maxNumber) //Рекурсивно отгадываем число
 {
     int predictNumber;
     char responce;
@@ -17,22 +18,22 @@ int TryToGuess(int minNumber, int maxNumber)
     {
     case '<':
     {
-        return(TryToGuess(minNumber, predictNumber) + 1);
+        return(TryToGuess(minNumber, predictNumber) + 1); //Меньше, уменьшаем диапазон, увеличиваем счётчик попыток
     }
     break;
     case '>':
     {
-        return(TryToGuess(predictNumber, maxNumber) + 1);
+        return(TryToGuess(predictNumber, maxNumber) + 1); //Больше, уменьшаем диапазон, увеличиваем счётчик попыток
     }
     break;
     case '=':
     {
-        return(1);
+        return(1); //Угадали, возвращаем 1
     }
     break;
     default:
     {
-        cout << "Не понимаю!";
+        cout << "Не понимаю!"; //Наши полномочия всё
         exit(0);
     }
     }
@@ -43,7 +44,7 @@ int main()
     setlocale(LC_ALL, "Russian"); // задаём русский текст
     system("chcp 1251"); // настраиваем кодировку консоли
     cout << "Игра \"Угадай число\"\n";
-    cout << "Угадано с " << TryToGuess(1, 100) << " попыток \n";
+    cout << "Угадано с " << TryToGuess(1, 100) << " попыток \n"; //Рекурсивно отгадываем, выводим количество попыток, равное уровню вложенности
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
