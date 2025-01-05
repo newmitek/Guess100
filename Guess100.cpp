@@ -9,6 +9,12 @@ using namespace std;
 
 int TryToGuess(int minNumber, int maxNumber) //Рекурсивно отгадываем число
 {
+    if (minNumber == maxNumber) //Сначала проверяем, не отгадано ли число уже, в этом случае вопросов не задаём
+    {
+        cout << "Загадано число " << minNumber << endl; //Собощаем о победе
+        return(1); //Возвращаем 1
+    };
+
     int predictNumber;
     char responce;
     predictNumber = (maxNumber + minNumber) / 2;
@@ -18,12 +24,12 @@ int TryToGuess(int minNumber, int maxNumber) //Рекурсивно отгадываем число
     {
     case '<':
     {
-        return(TryToGuess(minNumber, predictNumber) + 1); //Меньше, уменьшаем диапазон, увеличиваем счётчик попыток
+        return(TryToGuess(minNumber, predictNumber - 1) + 1); //Меньше, уменьшаем диапазон, увеличиваем счётчик попыток
     }
     break;
     case '>':
     {
-        return(TryToGuess(predictNumber, maxNumber) + 1); //Больше, уменьшаем диапазон, увеличиваем счётчик попыток
+        return(TryToGuess(predictNumber + 1, maxNumber) + 1); //Больше, уменьшаем диапазон, увеличиваем счётчик попыток
     }
     break;
     case '=':
@@ -43,7 +49,10 @@ int main()
 {
     setlocale(LC_ALL, "Russian"); // задаём русский текст
     system("chcp 1251"); // настраиваем кодировку консоли
-    cout << "Игра \"Угадай число\"\n";
+
+    int minNumber = 1;
+    int maxNumber = 100;
+    cout << "Игра \"Угадай число\"\n Загадайте число от " << minNumber << " до " << maxNumber << endl;
     cout << "Угадано с " << TryToGuess(1, 100) << " попыток \n"; //Рекурсивно отгадываем, выводим количество попыток, равное уровню вложенности
 }
 
